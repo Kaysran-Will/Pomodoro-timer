@@ -1,0 +1,194 @@
+html {
+    font-size: 100%;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: url('assets/pexels-eberhardgross-1624496.jpg') no-repeat center center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: relative; /* Needed for positioning the .top div */
+}
+
+/* New style for the top-right button container */
+.top {
+    position: absolute;
+    top: 1.5rem; /* Adjust as needed for spacing from top */
+    right: 1.5rem; /* Adjust as needed for spacing from right */
+    display: flex; /* To arrange buttons side-by-side */
+    gap: 0.8rem; /* Space between the two buttons */
+}
+
+.container {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 1.25rem;
+    padding: 4rem;
+    backdrop-filter: blur(0.625rem);
+    width: 45vw;
+    max-width: 28rem;
+}
+
+.modes {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.modes button {
+    border: 0.125rem solid rgba(255, 255, 255, 0.5);
+    border-radius: 2rem;
+    padding: 0.625rem 1.5rem;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0);
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    white-space: nowrap;
+    min-width: 8rem;
+    flex-basis: 0;
+    flex-grow: 1;
+}
+
+.modes button.active,
+.modes button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 1);
+}
+
+.timer {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+/* Applying shared styles to all controls buttons */
+.controls button {
+    border: none;
+    border-radius: 1.25rem; /* Matches container border-radius for consistency */
+    padding: 0.625rem 1.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    color: rgb(0, 0, 0); /* Default text color for non-icon buttons */
+    background: white; /* Default background for non-icon buttons */
+}
+
+.controls button:hover {
+    background: #f1f1f1;
+    transform: scale(1.05);
+}
+
+#start-text {
+    font-family: 'Orbitron', sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 0.9rem;
+    color: rgb(3, 3, 3);
+    padding: 20px;
+}
+
+
+
+/* Combined styles for icon buttons within .controls and .top */
+.start,
+.settings,
+.reset,
+.playlist,
+.bg {
+    background: rgba(128, 128, 128, 0.2); /* Transparent grey background */
+    border: 0.125rem solid rgba(255, 255, 255, 0.5); /* White outline */
+    border-radius: 50%; /* Make them perfectly circular */
+    width: 5rem;
+    height: 4rem;
+    padding: 0; /* No internal padding for icon buttons */
+    display: flex; /* Use flex to center the pseudo-element/icon */
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s, transform 0.2s;
+}
+
+/* Hover effect for icon buttons */
+.start:hover,
+.settings:hover,
+.reset:hover,
+.playlist:hover,
+.bg:hover {
+    background: rgba(128, 128, 128, 0.4); /* Slightly darker grey on hover */
+    border-color: rgba(255, 255, 255, 1); /* Solid white border on hover */
+    transform: scale(1.05);
+}
+
+
+/* Common styles for all icon pseudo-elements */
+.start::before,
+.settings::before,
+.reset::before{
+    content: "";
+    display: block; /* Important for width/height to work */
+    width: 4rem; /* Size of the SVG inside the button */
+    height: 4rem; /* Size of the SVG inside the button */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+     /* Turns black SVGs white */
+}
+
+.playlist::before,
+.bg::before {
+    content: "";
+    display: block; /* Important for width/height to work */
+    width: 2rem; /* Size of the SVG inside the button */
+    height: 2rem; /* Size of the SVG inside the button */
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    filter: invert(100%);
+}
+/* Specific background-images for each icon button (using CDN links) */
+.settings::before {
+    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/settings.svg');
+}
+
+.reset::before {
+    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/refresh.svg');
+}
+
+.playlist::before {
+    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/playlist.svg');
+}
+
+.bg::before {
+    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/photo.svg');
+}
+
+@media (max-width: 768px) {
+    body {
+        background-attachment: scroll;
+        background-position: center top;
+    }
+    .top {
+        top: 1rem;
+        right: 1rem;
+    }
+}
