@@ -1,5 +1,5 @@
 html {
-  font-size: 16px;
+  font-size: 1.2rem;
   /* 1rem = 16px */
 }
 
@@ -61,6 +61,7 @@ body {
 }
 
 .modes button {
+  font-size: 1rem;
   flex: 1;
   /* Ensures all buttons take equal space */
   border: 0.125rem solid rgba(255, 255, 255, 0.5);
@@ -316,6 +317,10 @@ body {
 
 
 @media (max-width: 480px) {
+  html {
+    font-size: 16px;
+  }
+
   .timer {
     font-size: 3.5rem;
     text-shadow:
@@ -326,7 +331,7 @@ body {
 }
 
 @media (max-width: 480px) {
-  .container{
+  .container {
     padding-left: 3rem;
     display: flex;
     align-items: center;
@@ -378,31 +383,40 @@ body {
   }
 }
 
-@media (max-height:480px){
-  .container{
+@media (max-height:480px) {
+  html {
+    font-size: 16px;
+  }
+
+  .container {
     transform: translateY(0.5rem);
   }
-  
+
 }
 
 
-  /*Tablet Tweaks*/
-  @media (max-width: 768px) {
-    .container {
-      padding: 2rem;
-      width: 100%;
-    }
-    .controls{
-      transform: translateY(-0.5rem);
-    }
-
-    .timer {
-      font-size: 4.5rem;
-    }
-
-    .modes {
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
+/*Tablet Tweaks*/
+@media (max-width: 768px) {
+  html {
+    font-size: 16px;
   }
+
+  .container {
+    padding: 2rem;
+    width: 100%;
+  }
+
+  .controls {
+    transform: translateY(-0.5rem);
+  }
+
+  .timer {
+    font-size: 4.5rem;
+  }
+
+  .modes {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+}
