@@ -1,194 +1,408 @@
 html {
-    font-size: 100%;
+  font-size: 16px;
+  /* 1rem = 16px */
 }
 
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'Segoe UI', sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
 }
 
 body {
-    height: 100vh;
-    background: url('assets/pexels-eberhardgross-1624496.jpg') no-repeat center center/cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    position: relative; /* Needed for positioning the .top div */
+  height: 100vh;
+  background: url('https://i.pinimg.com/1200x/90/70/32/9070324cdfc07c68d60eed0c39e77573.jpg') no-repeat center center/cover;
+  display: flex;
+  font-size: 1rem;
+  /* Equals 16px */
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+  /* Needed for positioning the .top div */
 }
 
 /* New style for the top-right button container */
 .top {
-    position: absolute;
-    top: 1.5rem; /* Adjust as needed for spacing from top */
-    right: 1.5rem; /* Adjust as needed for spacing from right */
-    display: flex; /* To arrange buttons side-by-side */
-    gap: 0.8rem; /* Space between the two buttons */
+  position: absolute;
+  top: 1.5rem;
+  /* Adjust as needed for spacing from top */
+  right: 1.5rem;
+  /* Adjust as needed for spacing from right */
+  display: flex;
+  /* To arrange buttons side-by-side */
+  gap: 0.8rem;
+  /* Space between the two buttons */
 }
 
 .container {
-    text-align: center;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 1.25rem;
-    padding: 4rem;
-    backdrop-filter: blur(0.625rem);
-    width: 45vw;
-    max-width: 28rem;
+  align-self: center;
+  text-align: center;
+  border-radius: 1.25rem;
+  padding: 4rem;
+  width: 45vw;
+  max-width: 28rem;
+  transform: translateY(-2rem);
 }
 
 .modes {
-    display: flex;
-    justify-content: center;
-    gap: 1.25rem;
-    margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .modes button {
-    border: 0.125rem solid rgba(255, 255, 255, 0.5);
-    border-radius: 2rem;
-    padding: 0.625rem 1.5rem;
-    font-size: 1rem;
-    color: white;
-    cursor: pointer;
-    background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-    white-space: nowrap;
-    min-width: 8rem;
-    flex-basis: 0;
-    flex-grow: 1;
+  flex: 1;
+  /* Ensures all buttons take equal space */
+  border: 0.125rem solid rgba(255, 255, 255, 0.5);
+  border-radius: 2rem;
+  padding: 0.625rem 1.5rem;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  box-shadow:
+    0 0 5px rgba(255, 255, 255, 0.3),
+    0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateY(0);
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+  /* or center, if you want tighter spacing */
+  align-items: center;
 }
+
 
 .modes button.active,
 .modes button:hover {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 1);
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 1);
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.5),
+    /* Brighter inner glow */
+    0 6px 12px rgba(0, 0, 0, 0.4);
+  /* Slightly deeper shadow */
+  transform: translateY(-2px);
+}
+
+.modes button.active,
+.modes button:active {
+  /* Use :active for click-down effect */
+  background-color: rgba(255, 255, 255, 0.3);
+  /* Darker active state */
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 1);
+  /* Pressed in effect */
+  box-shadow:
+    inset 0 0 5px rgba(0, 0, 0, 0.5),
+    /* Inner shadow for pressed look */
+    inset 0 2px 5px rgba(0, 0, 0, 0.3);
+  /* Deeper inner shadow */
+  transform: translateY(2px);
+  /* Push down on active */
 }
 
 .timer {
-    font-size: 6rem;
-    font-weight: bold;
-    margin-bottom: 2rem;
+  font-size: 6rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-shadow:
+    0.05em 0.05em 0 rgba(0, 0, 0, 0.4),
+    /* Main shadow for depth */
+    0.1em 0.1em 0 rgba(0, 0, 0, 0.2),
+    /* Deeper shadow for more extrusion */
+    0 0 10px rgba(255, 255, 255, 0.5);
+  /* Optional: slight glow/highlight */
+  /* You can adjust the first two values (offset-x, offset-y) for the shadow direction.
+       The third value is blur-radius. The last is color. */
 }
 
 .controls {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
 }
 
 /* Applying shared styles to all controls buttons */
 .controls button {
-    border: none;
-    border-radius: 1.25rem; /* Matches container border-radius for consistency */
-    padding: 0.625rem 1.5rem;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.2s;
-    color: rgb(0, 0, 0); /* Default text color for non-icon buttons */
-    background: white; /* Default background for non-icon buttons */
+  display: flex;
+  width: auto;
+  flex-direction: row;
+  border: 0.125rem solid rgba(255, 255, 255, 0.5);
+  border-radius: 1.25rem;
+  /* Matches container border-radius for consistency */
+  padding: 0.625rem 1.5rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+  color: rgb(0, 0, 0);
+  /* Default text color for non-icon buttons */
+  background: white;
+  /* Default background for non-icon buttons */
 }
 
 .controls button:hover {
-    background: #f1f1f1;
-    transform: scale(1.05);
+  background: #f1f1f1;
+  transform: scale(1.05);
 }
 
-#start-text {
-    font-family: 'Orbitron', sans-serif;
-    font-style: italic;
-    font-weight: 300;
-    font-size: 0.9rem;
-    color: rgb(3, 3, 3);
-    padding: 20px;
-}
+
 
 
 
 /* Combined styles for icon buttons within .controls and .top */
-.start,
 .settings,
-.reset,
+.reset {
+  background: rgba(128, 128, 128, 0.2);
+  /* Transparent grey background */
+  border: 0.125rem solid rgba(255, 255, 255, 0.5);
+  /* White outline */
+  border-radius: 50%;
+  /* Make them perfectly circular */
+  width: 5rem;
+  height: 4rem;
+  padding: 0;
+  /* No internal padding for icon buttons */
+  display: flex;
+  flex-direction: row;
+  /* Use flex to center the pseudo-element/icon */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.3),
+    /* Primary shadow for lift */
+    inset 0 0 3px rgba(255, 255, 255, 0.2);
+  /* Subtle inner highlight */
+
+}
+
 .playlist,
 .bg {
-    background: rgba(128, 128, 128, 0.2); /* Transparent grey background */
-    border: 0.125rem solid rgba(255, 255, 255, 0.5); /* White outline */
-    border-radius: 50%; /* Make them perfectly circular */
-    width: 5rem;
-    height: 4rem;
-    padding: 0; /* No internal padding for icon buttons */
-    display: flex; /* Use flex to center the pseudo-element/icon */
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    transition: background 0.3s, border-color 0.3s, transform 0.2s;
+  background: rgba(128, 128, 128, 0.2);
+  /* Transparent grey background */
+  border: 0.125rem solid rgba(255, 255, 255, 0.5);
+  /* White outline */
+  border-radius: 50%;
+  /* Make them perfectly circular */
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  /* No internal padding for icon buttons */
+  display: flex;
+  /* Use flex to center the pseudo-element/icon */
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background 0.3s, border-color 0.3s, transform 0.2s;
+  box-shadow:
+    0 2px 5px rgba(0, 0, 0, 0.3),
+    /* Primary shadow for lift */
+    inset 0 0 3px rgba(255, 255, 255, 0.2);
+  /* Subtle inner highlight */
+  transform: translateY(0);
 }
 
 /* Hover effect for icon buttons */
-.start:hover,
+
 .settings:hover,
 .reset:hover,
 .playlist:hover,
 .bg:hover {
-    background: rgba(128, 128, 128, 0.4); /* Slightly darker grey on hover */
-    border-color: rgba(255, 255, 255, 1); /* Solid white border on hover */
-    transform: scale(1.05);
+  background: rgba(128, 128, 128, 0.4);
+  /* Slightly darker grey on hover */
+  border-color: rgba(255, 255, 255, 1);
+  /* Solid white border on hover */
+  transform: scale(1.2);
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    /* Deeper shadow */
+    inset 0 0 5px rgba(255, 255, 255, 0.3);
+  /* Brighter inner highlight */
 }
 
 
 /* Common styles for all icon pseudo-elements */
-.start::before,
 .settings::before,
-.reset::before{
-    content: "";
-    display: block; /* Important for width/height to work */
-    width: 4rem; /* Size of the SVG inside the button */
-    height: 4rem; /* Size of the SVG inside the button */
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-     /* Turns black SVGs white */
+.reset::before {
+  content: "";
+  display: block;
+  /* Important for width/height to work */
+  width: 4rem;
+  /* Size of the SVG inside the button */
+  height: 4rem;
+  /* Size of the SVG inside the button */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  /* Turns black SVGs white */
 }
 
 .playlist::before,
 .bg::before {
-    content: "";
-    display: block; /* Important for width/height to work */
-    width: 2rem; /* Size of the SVG inside the button */
-    height: 2rem; /* Size of the SVG inside the button */
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-    filter: invert(100%);
+  content: "";
+  display: block;
+  /* Important for width/height to work */
+  width: 2rem;
+  /* Size of the SVG inside the button */
+  height: 2rem;
+  /* Size of the SVG inside the button */
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  filter: invert(100%);
 }
+
 /* Specific background-images for each icon button (using CDN links) */
 .settings::before {
-    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/settings.svg');
+  background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/settings.svg');
 }
 
 .reset::before {
-    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/refresh.svg');
+  background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/refresh.svg');
 }
 
 .playlist::before {
-    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/playlist.svg');
+  background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/playlist.svg');
 }
 
 .bg::before {
-    background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/photo.svg');
+  background-image: url('https://cdn.jsdelivr.net/npm/@tabler/icons@latest/icons/photo.svg');
 }
 
-@media (max-width: 768px) {
-    body {
-        background-attachment: scroll;
-        background-position: center top;
-    }
-    .top {
-        top: 1rem;
-        right: 1rem;
-    }
+.start-button {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 1.2rem;
+  min-height: 4rem;
+  padding: 0.625rem 1.5rem;
+  background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  border: 0.125 solid rgba(255, 255, 255, 0.5);
+  border-radius: 2rem;
+  color: #000;
+  min-width: 7rem;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow:
+    0 4px 8px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
 }
+
+.start-button:hover {
+  background: linear-gradient(to bottom, #f1f1f1, #d0d0d0);
+  transform: translateY(-2px);
+  box-shadow:
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+@media (max-width: 480px) {
+  .timer {
+    font-size: 3.5rem;
+    text-shadow:
+      0.03em 0.03em 0 rgba(0, 0, 0, 0.4),
+      0.06em 0.06em 0 rgba(0, 0, 0, 0.2),
+      0 0 5px rgba(255, 255, 255, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  .container{
+    padding-left: 3rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .modes {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .timer {
+    font-size: 3.2rem;
+  }
+
+  .controls {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .controls button {
+    font-size: 1.5rem;
+    padding: 0.75rem 1.25rem;
+    height: 3.5rem;
+    border-radius: 1.2rem;
+    width: 100%;
+  }
+
+  .modes {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: nowrap;
+    margin-top: 3.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+
+  }
+
+  .modes button {
+    padding: 0.4rem 0.6rem;
+    text-align: center;
+    font-size: 0.9rem;
+    border-radius: 1rem;
+    margin: 0 auto;
+    vertical-align: middle;
+    display: inline-block;
+  }
+}
+
+@media (max-height:480px){
+  .container{
+    transform: translateY(0.5rem);
+  }
+  
+}
+
+
+  /*Tablet Tweaks*/
+  @media (max-width: 768px) {
+    .container {
+      padding: 2rem;
+      width: 100%;
+    }
+    .controls{
+      transform: translateY(-0.5rem);
+    }
+
+    .timer {
+      font-size: 4.5rem;
+    }
+
+    .modes {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+  }
