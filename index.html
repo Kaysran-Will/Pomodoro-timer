@@ -1,33 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pomodoro Timer</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
+  <div class="background-layer"></div>
   <div id="app">
     <div class="top">
       <button class="playlist"></button>
       <button class="bg"></button>
+      <input type="file" id="bg-upload" accept="image/*" style="display: none;">
     </div>
     <div class="container">
-    <div class="modes">
-      <button class="active">POMODORO</button>
-      <button>SHORT BREAK</button>
-      <button>LONG BREAK</button>
-    </div>
-    <div class="timer">20:00</div>
-    <div class="controls">
-      <button class="start-button">START!</button>
-      <button class="settings"></button>
-      <button class="reset"></button>
-      
+      <div class="modes">
+        <button class="active">POMODORO</button>
+        <button>SHORT BREAK</button>
+        <button>LONG BREAK</button>
+      </div>
+      <div class="timer">20:00</div>
+      <div class="controls">
+        <button class="start-button">START!</button>
+        <button class="settings"></button>
+        <button class="reset"></button>
+
+      </div>
     </div>
   </div>
-
+  <div class="modal-overlay" hidden>
+    <div class="modal-container">
+      <div class="modal-nav">
+        <button class="nav-item" data-section="THEME">THEME</button>
+        <button class="nav-item" data-section="TIMER">TIMER</button>
+        <button class="nav-item" data-section="SOUNDS">SOUNDS</button>
+      </div>
+      <div class="modal-settings-content">
+        <div id="theme-settings" class="theme-section active">
+          <h3 class="hd">Select theme:</h3>
+          <div class="setting-item">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+              <option value="cozy-room">Cozy Room</option>
+              <option value="sunrise">Sunrise</option>
+              <option value="night">Night</option>
+            </select>
+          </div>
+        </div>
+        <div class="timer-settings">
+          <div class="tsetcontainer">
+            <div class="pomo">
+              <label for="pom" class="form-label"></label>
+              <input type="number" id="pom" step="1" min="1" max="90" value="20">
+              <div class="form-text">minutes</div>
+            </div>
+            <div class="sbr">
+              <label for="sbr" class="form-label"></label>
+              <input type="number" id="sbr" step="1" min="1" max="90" value="20">
+              <div class="form-text">minutes</div>
+            </div>
+            <div class="lbr">
+              <label for="lbr" class="form-label"></label>
+              <input type="number" id="lbr" step="1" min="1" max="90" value="20">
+              <div class="form-text">minutes</div>
+            </div>
+          </div>
+        </div>
+        <div class="sound-settings">
+          <label for="alertSound" class="form-label">Select alert sound:</label>
+          <div class="custom-select-wrapper" tabindex="0"> 
+            <select id="alertSound" class="form-select" aria-label="Select timer alert sound">
+            <option value="bell">Digital</option>
+            <option value="chime">Classic</option>
+            <option value="birds">Siren</option>
+            <option value="birds">Watchtower</option>
+          </select>
+          <div class="select-arrow"></div>
+          </div>
+            
+          <div class="sound-switch">
+            <input class="form-check-input" type="checkbox" id="playTimerSound">
+            <label class="form-check-label" for="playTimerSound">Play sound when timer finishes</label>
+          </div>
+          <div class="volume-slider">
+            <label for="timerSoundVolume" class="form-label">Alert volume</label>
+            <input type="range" class="form-range" min="0" max="1" step="0.05" id="timerSoundVolume">
+          </div>
+        </div>
+        <div class="end-section">
+          <button class="reset-settings">Reset Settings</button>
+          <button class="close">Close</button>
+          <button class="savechanges">Save Changes</button>
+        </div>
+      </div>
+    </div>
   </div>
   <script src="script.js"></script>
 </body>
+
 </html>

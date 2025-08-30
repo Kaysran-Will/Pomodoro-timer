@@ -18,8 +18,8 @@ html {
 }
 
 body {
+  margin: 0;
   height: 100vh;
-  background: url('https://i.pinimg.com/1200x/90/70/32/9070324cdfc07c68d60eed0c39e77573.jpg') no-repeat center center/cover;
   display: flex;
   font-size: 1rem;
   /* Equals 16px */
@@ -30,17 +30,26 @@ body {
   /* Needed for positioning the .top div */
 }
 
+.background-layer {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background: url('https://i.pinimg.com/1200x/90/70/32/9070324cdfc07c68d60eed0c39e77573.jpg') no-repeat center center/cover;
+}
+
+#app {
+  position: relative;
+
+}
+
 /* New style for the top-right button container */
 .top {
-  position: absolute;
-  top: 1.5rem;
-  /* Adjust as needed for spacing from top */
-  right: 1.5rem;
-  /* Adjust as needed for spacing from right */
+  position: fixed;
+  /* or fixed if you want it to stick while scrolling */
+  top: 1rem;
+  right: 1rem;
   display: flex;
-  /* To arrange buttons side-by-side */
   gap: 0.8rem;
-  /* Space between the two buttons */
 }
 
 .container {
@@ -382,6 +391,468 @@ body {
     display: inline-block;
   }
 }
+
+#app.blurred-background {
+  filter: blur(7px);
+  transition: filter 0.3s ease;
+  pointer-events: none;
+  /* Optional: prevents clicking on blurred stuff */
+}
+
+/* Settings Modal Overlay - Stretches full screen for backdrop */
+.modal-overlay {
+  position: fixed;
+  /* Crucial for full-screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  /* Use flexbox to center its child (.modal-container) */
+  justify-content: center;
+  /* Horizontally center content */
+  align-items: center;
+  /* Vertically center content */
+  z-index: 1000;
+  inset: 0;
+  /* Ensure it's on top of everything */
+  padding: 1rem;
+  /* Padding for overall modal on small screens */
+
+  /* For smooth fade-in/out */
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+
+  /* Allows scrolling if the entire modal-container is too tall */
+  overflow-y: auto;
+}
+
+.modal-overlay::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(7px);
+  z-index: -1;
+}
+
+/* This class will be toggled by JavaScript */
+.modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* NEW: The actual modal box container */
+.modal-container {
+  background-color: rgb(0, 0, 0);
+  /* semi-transparent */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Dark background for the whole modal box */
+  border-radius: 1rem;
+  /* Rounded corners for the entire modal */
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.5);
+  /* Stronger shadow for the box */
+  width: 90%;
+  /* Responsive width */
+  max-width: 600px;
+  /* Max width for larger screens */
+  display: flex;
+  flex-direction: column;
+  /* Stack nav, content, and footer vertically */
+  max-height: 95vh;
+  /* Limit height to viewport height */
+  overflow-y: auto;
+  /* Allow internal scrolling if content is too tall */
+  color: white;
+  /* Default text color for modal content */
+}
+
+/* Inner Modal Sections */
+.modal-nav {
+  display: flex;
+  /* Arrange nav items horizontally */
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  /* Allow nav items to wrap */
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  /* Adjust padding to fit with overall container */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  /* Separator */
+  justify-content: center;
+  /* Center nav items horizontally */
+}
+
+.modal-nav .nav-item {
+  background: none;
+  border: none;
+  color: #bbb;
+  padding: 0.5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  flex-grow: 1;
+  /* Allow nav items to grow to fill space */
+  white-space: nowrap;
+  /* Prevent text wrapping */
+}
+
+.modal-nav .nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.modal-nav .nav-item.active {
+  border-bottom: 2px solid #4caf50;
+  color: #fff;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+
+.modal-settings-content {
+  padding: 1.5rem 2rem;   /* Left/right pads match the container above */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;           /* Space between each section */
+  align-items: center;   /* Center all child elements */
+}
+
+.modal-settings-content h3 {
+  font-weight: 600;
+  color: #eee;
+}
+
+
+.end-section {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  justify-content: center;  /* Center the buttons horizontally */
+  gap: 1.5rem;              /* Same gap as other flex containers */
+  padding-top: 1rem;        /* Space above the footer */
+  border-top: 1px solid rgba(255,255,255,0.1);
+  margin-top: 1rem;
+}
+
+.end-section button {
+  /* Target all buttons in end-section */
+  background-color: #555;
+  color: white;
+  border: none;
+  width: 30%;
+  padding: 0.7rem 0.6rem;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.end-section button:hover {
+  background-color: #777;
+}
+
+.end-section .savechanges {
+  /* Specific style for save button */
+  background-color: #4CAF50;
+}
+
+.end-section .savechanges:hover {
+  background-color: #45a049;
+}
+
+.end-section .reset-settings {
+  /* Specific style for reset button */
+  background-color: #f44336;
+}
+
+.end-section .reset-settings:hover {
+  background-color: #da190b;
+}
+
+
+/* Hide all settings sections by default */
+.theme-section,
+.timer-settings,
+.sound-settings {
+  display: none;
+}
+
+/* Show the active settings section */
+.theme-section.active,
+.timer-settings.active,
+.sound-settings.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Common setting item styles */
+.setting-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.setting-item label,
+.form-label {
+  font-size: 1rem;
+  color: #ccc;
+  font-size: 0.95rem;
+  flex-direction: column;
+}
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 230px;              /* Fixed width */
+  margin-top: 0.6rem;
+  z-index: 1;                /* Ensure wrapper sits above modal background */
+}
+
+/* Focus enhancement */
+.form-select:focus + .select-arrow::after {
+  border-top-color: #8be9fd;
+}
+.setting-item select{
+  background-color: #333;
+  border: 1px solid #555;
+  color: #fff;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+  padding: 0.35rem 2rem 0.35rem 1rem;
+  margin-top: 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  appearance: none;
+  background-repeat: no-repeat;
+  background-position: left 6.4em top 50%, 0 0;
+  background-size: 0.65em auto, 100%;
+}
+.form-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  width: 100%;               /* Match wrapper width */
+  padding: 0.75rem 3rem 0.75rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  text-align-last: center;   /* Center selected option text */
+
+  background-color: #222;    /* Darker background for contrast */
+  color: #fff;               /* White text for arrow consistency */
+  border: 1px solid #555;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  cursor: pointer;
+  z-index: 2;                /* Ensure select input is above wrapper */
+  transition: all 0.3s ease;
+}
+
+/* 2. Native dropdown styling (limited support) */
+.form-select option {
+  background-color: #222;    /* Match select background */
+  color: #fff;               /* White text */
+  text-align: center;
+}
+
+.form-select::-ms-expand {
+  display: none;             /* Hide native arrow in IE/Edge */
+}
+
+/* 3. Custom arrow styling */
+.select-arrow {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  pointer-events: none;
+  transition: transform 0.2s ease-in-out;
+  z-index: 3;                /* Above select */
+}
+.custom-select-wrapper:focus-within .select-arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+.select-arrow::after {
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #fff; /* Match select text color */
+}
+
+
+
+/* 5. Focus & hover states */
+.form-select:focus {
+  outline: none;
+  border-color: #8be9fd;
+  box-shadow: 0 0 0 3px rgba(139,233,253,0.3);
+  background-color: #333;
+}
+
+.form-select:hover {
+  border-color: #666;
+  background-color: #2a2a2a;
+}
+
+/* Timer Settings Specific Styles */
+  .tsetcontainer {
+    display: flex;
+    justify-content: center;
+    /* center the three blocks as a group */
+    gap: 1.5rem;
+    margin-right: 0.5rem;
+  }
+
+  .tsetcontainer>div {
+    display: flex;
+    /* stack input above label */
+    flex-direction: column;
+    align-items: center;
+    /* center input & label */
+    gap: 0.5rem;
+  }
+
+.tsetcontainer input[type="number"] {
+  background-color: #ffffff;
+  font-weight: 500;
+  border: 1px solid #666;
+  color: rgb(0, 0, 0);
+  padding: 1rem;
+  
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  width: 80%;
+  /* Adjust width of number inputs */
+  text-align: center;
+}
+
+.form-text {
+  font-size: 0.8rem;
+  color: #999;
+
+}
+
+/* Sound Settings Specific Styles */
+.sound-switch {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.sound-switch input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.volume-slider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  
+  margin-bottom: 1.1rem;           /* Fill available width */
+  
+}
+
+.volume-slider input[type="range"] {
+  width: 100%;           /* Stretch to 100% of container */
+  max-width: 300px;      /* Or any fixed max width you prefer */
+  -webkit-appearance: none;
+  appearance: none;
+  height: 10px;
+  background: #555;
+  border-radius: 5px;
+  outline: none;
+  opacity: 0.7;
+  transition: opacity .2s;
+}
+
+.volume-slider input[type="range"]:hover {
+  opacity: 1;
+}
+
+.volume-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #8be9fd;
+  /* Match link color */
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.volume-slider input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #8be9fd;
+  cursor: pointer;
+}
+.volume-slider input[type="range"]::-moz-range-track {
+  background: #555;
+  height: 8px;
+  border-radius: 5px;
+  border: none;
+}
+
+
+/* Responsive adjustments for modal */
+@media (max-width: 600px) {
+  .modal-container {
+    width: 100%;
+    /* Take full width on small screens */
+    border-radius: 0;
+    /* No rounded corners, fills screen edges */
+  }
+
+  .modal-nav {
+    flex-direction: column;
+    /* Stack nav items vertically on small screens */
+    align-items: stretch;
+    /* Stretch nav items */
+    padding: 1rem;
+    /* Smaller padding */
+  }
+
+  .modal-nav .nav-item {
+    padding: 0.8rem;
+  }
+
+  .modal-settings-content {
+    padding: 1rem;
+    /* Smaller padding */
+  }
+
+  .end-section {
+    flex-direction: column;
+    /* Stack footer buttons vertically */
+    align-items: stretch;
+    /* Stretch buttons to full width */
+    padding: 1rem;
+    /* Smaller padding */
+  }
+
+
+}
+
+
 
 @media (max-height:480px) {
   html {
