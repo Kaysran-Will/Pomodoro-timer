@@ -456,12 +456,11 @@ body {
   /* Responsive width */
   max-width: 600px;
   /* Max width for larger screens */
+  height: 600px; 
   display: flex;
   flex-direction: column;
   /* Stack nav, content, and footer vertically */
-  max-height: 95vh;
-  /* Limit height to viewport height */
-  overflow-y: auto;
+  overflow: hidden;
   /* Allow internal scrolling if content is too tall */
   color: white;
   /* Default text color for modal content */
@@ -512,10 +511,13 @@ body {
 
 
 .modal-settings-content {
+  flex: 1;
+  overflow: hidden;
   padding: 1.5rem 2rem;   /* Left/right pads match the container above */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;           /* Space between each section */
+  gap: 1.5rem;
+  justify-content: center;           /* Space between each section */
   align-items: center;   /* Center all child elements */
 }
 
@@ -583,15 +585,42 @@ body {
 
 /* Show the active settings section */
 .theme-section.active,
-.timer-settings.active,
-.sound-settings.active {
+.timer-settings.active{
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
 }
+.sound-settings.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;    /* Start from top when scrolling */
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  height: 100%;                   /* Take full available height */
+  overflow-y: auto;               /* Enable scrolling */
+  padding-right: 0.5rem;          /* Space for scrollbar */
+}
 
+.sound-settings::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sound-settings::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.sound-settings::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.sound-settings::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
 /* Common setting item styles */
 .setting-item {
   display: flex;
@@ -604,17 +633,19 @@ body {
 .setting-item label,
 .form-label {
   font-size: 1rem;
-  color: #ccc;
+  color: #e0dfdf;
   font-size: 0.95rem;
   flex-direction: column;
 }
 .custom-select-wrapper {
   position: relative;
-  display: inline-block;
-  width: 230px;              /* Fixed width */
-  margin-top: 0.6rem;
-  z-index: 1;                /* Ensure wrapper sits above modal background */
+  display: flex;
+  justify-content: center;
+  width: 200px;              /* Fixed width */
+  z-index: 1;                 /* Ensure wrapper sits above modal background */
+  user-select: none;                
 }
+
 
 /* Focus enhancement */
 .form-select:focus + .select-arrow::after {
@@ -640,10 +671,12 @@ body {
   -moz-appearance: none;
 
   width: 100%;               /* Match wrapper width */
-  padding: 0.75rem 3rem 0.75rem 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem ;
   font-size: 1rem;
   font-weight: 500;
-  text-align: center;
+  text-align:start;
   text-align-last: center;   /* Center selected option text */
 
   background-color: #222;    /* Darker background for contrast */
@@ -655,7 +688,32 @@ body {
   z-index: 2;                /* Ensure select input is above wrapper */
   transition: all 0.3s ease;
 }
+.form-select1{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 
+  width: 80%;               /* Match wrapper width */
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 0.5rem ;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align:start;
+  text-align-last: center;   /* Center selected option text */
+
+  background-color: #222;    /* Darker background for contrast */
+  color: #fff;               /* White text for arrow consistency */
+  border: 1px solid #555;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  cursor: pointer;
+  z-index: 2;                /* Ensure select input is above wrapper */
+  transition: all 0.3s ease;
+}
+#theme-select{
+  margin-bottom: 0.7rem;
+}
 /* 2. Native dropdown styling (limited support) */
 .form-select option {
   background-color: #222;    /* Match select background */
@@ -677,10 +735,22 @@ body {
   transition: transform 0.2s ease-in-out;
   z-index: 3;                /* Above select */
 }
-.custom-select-wrapper:focus-within .select-arrow {
+.select-arrow1{
+  position: absolute;
+  right: 1.7rem;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  pointer-events: none;
+  transition: transform 0.2s ease-in-out;
+  z-index: 3;                /* Above select */
+}
+.custom-select-wrapper:focus-within .select-arrow{
   transform: translateY(-50%) rotate(180deg);
 }
-.select-arrow::after {
+.custom-select-wrapper:focus-within .select-arrow1{
+  transform: translateY(-50%) rotate(180deg);
+}
+.select-arrow::after,.select-arrow1::after {
   content: '';
   display: block;
   width: 0;
@@ -890,4 +960,244 @@ body {
     justify-content: center;
   }
 
+}
+
+/* Music Player Overlay */
+.music-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(0.2rem);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 1rem;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.music-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.music-player {
+  background: rgba(20, 20, 20, 0.95);
+  border: 0.1rem solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  min-width: 20rem;
+  max-width: 25rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.3);
+  transform: translateY(-1rem);
+  transition: transform 0.3s ease;
+}
+
+.music-overlay.show .music-player {
+  transform: translateY(0);
+}
+
+/* Header */
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
+}
+
+.player-header h3 {
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+/* Song Selector Dropdown */
+.song-selector {
+  margin-bottom: 1.2rem;
+}
+
+.custom-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.selected-song {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 0.1rem solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.4rem;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+}
+
+.selected-song:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+.selected-song span {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.track-icon {
+  color: rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.dropdown-arrow {
+  color: rgba(255, 255, 255, 0.5);
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.custom-dropdown.open .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.song-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: rgba(30, 30, 30, 0.98);
+  border: 0.1rem solid rgba(255, 255, 255, 0.15);
+  border-radius: 0.4rem;
+  margin-top: 0.2rem;
+  max-height: 12rem;
+  overflow-y: auto;
+  z-index: 100;
+  list-style: none;
+  padding: 0.2rem 0;
+  margin: 0.2rem 0 0 0;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-0.5rem);
+  transition: all 0.2s ease;
+  box-shadow: 0 0.3rem 1rem rgba(0, 0, 0, 0.3);
+}
+
+.custom-dropdown.open .song-options {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.song-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 0.85rem;
+}
+
+.song-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.song-option.active {
+  background: rgba(100, 200, 255, 0.15);
+  color: #64c8ff;
+}
+
+/* Player Controls */
+.player-controls {
+  display: flex;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.1);
+  border: 0.1rem solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.control-btn:active {
+  transform: scale(0.95);
+}
+
+/* Custom Scrollbar */
+.song-options::-webkit-scrollbar {
+  width: 0.3rem;
+}
+
+.song-options::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0.15rem;
+}
+
+.song-options::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 0.15rem;
+}
+
+.song-options::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 48rem) {
+  .music-overlay {
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .music-player {
+    min-width: 90vw;
+    max-width: 90vw;
+  }
 }

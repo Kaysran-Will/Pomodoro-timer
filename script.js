@@ -230,5 +230,98 @@ const fileInput = document.getElementById('bg-upload');
 imageButton.addEventListener('click', () => {
   fileInput.click();  // This will trigger the file picker dialog
 });
+document.querySelector('.playlist').addEventListener('click', () => {
+  showMusicPlayer();
+});
 
+// Music Player Overlay Functionality
+const musicOverlay = document.getElementById('musicOverlay');
+const closeMusicPlayer = document.getElementById('closeMusicPlayer');
+const songDropdown = document.getElementById('songDropdown');
+const selectedSong = document.getElementById('selectedSong');
+const songOptions = document.getElementById('songOptions');
+
+// Show overlay function (call this from your playlist button)
+function showMusicPlayer() {
+  musicOverlay.removeAttribute('hidden');
+  setTimeout(() => musicOverlay.classList.add('show'), 10);
+}
+
+// Hide overlay function
+function hideMusicPlayer() {
+  musicOverlay.classList.remove('show');
+  setTimeout(() => musicOverlay.setAttribute('hidden', ''), 300);
+}
+
+// Close button functionality
+closeMusicPlayer.addEventListener('click', hideMusicPlayer);
+
+// Close when clicking outside
+musicOverlay.addEventListener('click', (e) => {
+  if (e.target === musicOverlay) {
+    hideMusicPlayer();
+  }
+});
+
+// Dropdown functionality
+selectedSong.addEventListener('click', (e) => {
+  e.stopPropagation();
+  songDropdown.classList.toggle('open');
+});
+
+// Song selection
+songOptions.addEventListener('click', (e) => {
+  const option = e.target.closest('.song-option');
+  if (option) {
+    // Remove active class from all options
+    document.querySelectorAll('.song-option').forEach(opt => 
+      opt.classList.remove('active')
+    );
+    
+    // Add active class to selected option
+    option.classList.add('active');
+    
+    // Update selected display
+    const iconSvg = option.querySelector('.track-icon').outerHTML;
+    const text = option.textContent.trim();
+    selectedSong.querySelector('span').textContent = text;
+    selectedSong.querySelector('.track-icon').outerHTML = iconSvg;
+    
+    // Close dropdown
+    songDropdown.classList.remove('open');
+  }
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', () => {
+  songDropdown.classList.remove('open');
+});
+
+// Control button functionality (add your logic here)
+// Control button functionality
+document.getElementById('backwardBtn').addEventListener('click', () => {
+  console.log('Backward clicked');
+  // Add your previous track functionality
+});
+
+document.getElementById('playBtn').addEventListener('click', () => {
+  console.log('Play clicked');
+  // Add your play functionality
+});
+
+document.getElementById('pauseBtn').addEventListener('click', () => {
+  console.log('Pause clicked');
+  // Add your pause functionality
+});
+
+
+
+document.getElementById('forwardBtn').addEventListener('click', () => {
+  console.log('Forward clicked');
+  // Add your next track functionality
+});
+
+
+// Expose the show function globally so you can call it from your playlist button
+window.showMusicPlayer = showMusicPlayer;
 
