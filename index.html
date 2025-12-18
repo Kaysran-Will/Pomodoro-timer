@@ -76,10 +76,10 @@
           <label for="alertSound" class="form-label">Select alert sound:</label>
           <div class="custom-select-wrapper" tabindex="0">
             <select id="alertSound" class="form-select1" aria-label="Select timer alert sound">
-              <option value="bell">Digital</option>
-              <option value="chime">Classic</option>
-              <option value="birds">Siren</option>
-              <option value="birds">Watchtower</option>
+              <option value="Digital">Digital</option>
+              <option value="Classic">Classic</option>
+              <option value="Siren">Siren</option>
+              <option value="Watchtower">Watchtower</option>
             </select>
             <div class="select-arrow1"></div>
           </div>
@@ -104,6 +104,9 @@
   <!-- Music Player Overlay -->
   <div class="music-overlay" id="musicOverlay" hidden>
     <div class="music-player">
+      <!-- Add Audio Element -->
+      <audio id="audioPlayer" preload="metadata"></audio>
+
       <div class="player-header">
         <h3>Music Player</h3>
         <button class="close-btn" id="closeMusicPlayer">×</button>
@@ -121,29 +124,47 @@
             </svg>
           </div>
           <ul class="song-options" id="songOptions">
-            <li data-value="none" class="song-option active">
+            <li data-value="none" data-file="" class="song-option active">
               <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
                 <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
               </svg>
               No Music
             </li>
-            <li data-value="track1" class="song-option">
+            <li data-value="track1" data-file="assets/audio/lofi1.mp3" class="song-option">
               <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
                 <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
               </svg>
-              Lofi Chill Beats
+              Lofi 1
             </li>
-            <li data-value="track2" class="song-option">
+            <li data-value="track2" data-file="assets/audio/lofi2.mp3" class="song-option">
               <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
                 <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
               </svg>
-              Ambient Forest
+              Lofi 2
             </li>
-            <li data-value="track3" class="song-option">
+            <li data-value="track3" data-file="assets/audio/battle.mp3" class="song-option">
               <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
                 <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
               </svg>
-              Rain Sounds
+              Battle
+            </li>
+            <li data-value="track4" data-file="assets/audio/energetic.mp3" class="song-option">
+              <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
+              </svg>
+              Energetic
+            </li>
+            <li data-value="track5" data-file="assets/audio/peace.mp3" class="song-option">
+              <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
+              </svg>
+              Peace
+            </li>
+            <li data-value="track6" data-file="assets/audio/piano.mp3" class="song-option">
+              <svg class="track-icon" viewBox="0 0 24 24" width="16" height="16">
+                <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6Z" />
+              </svg>
+              Piano
             </li>
           </ul>
         </div>
@@ -160,19 +181,15 @@
             <path fill="currentColor" d="M8 5v14l11-7z" />
           </svg>
         </button>
-        <button class="control-btn" id="pauseBtn" title="Pause">
-          <svg viewBox="0 0 24 24" width="18" height="18">
-            <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-          </svg>
-        </button>
         <button class="control-btn" id="forwardBtn" title="Next">
           <svg viewBox="0 0 24 24" width="18" height="18">
             <path fill="currentColor" d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" />
           </svg>
         </button>
       </div>
-
     </div>
+  </div>
+
   </div>
 
   <script src="script.js"></script>

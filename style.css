@@ -693,13 +693,13 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  width: 80%;               /* Match wrapper width */
+  width: 100%;               /* Match wrapper width */
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-right: 0.5rem ;
   font-size: 1rem;
   font-weight: 500;
-  text-align:start;
+  text-align:center;
   text-align-last: center;   /* Center selected option text */
 
   background-color: #222;    /* Darker background for contrast */
@@ -728,7 +728,7 @@ body {
 /* 3. Custom arrow styling */
 .select-arrow {
   position: absolute;
-  right: 1rem;
+  right: 0.9rem;
   top: 50%;
   transform: translateY(-50%) rotate(0deg);
   pointer-events: none;
@@ -737,8 +737,8 @@ body {
 }
 .select-arrow1{
   position: absolute;
-  right: 1.7rem;
-  top: 50%;
+  right: 0.9rem;
+  top: 52%;
   transform: translateY(-50%) rotate(0deg);
   pointer-events: none;
   transition: transform 0.2s ease-in-out;
