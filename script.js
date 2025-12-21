@@ -237,10 +237,10 @@ document.querySelector('.playlist').addEventListener('click', () => {
 function playAudioForDuration(durationInSeconds, alarmitem) {
     const audioFiles = {
       // Key-value pairs: 'soundName': new Audio('path/to/file.mp3')
-      Digital: new Audio('C:/Personal projects/Pomodoro Timer Web App/assets/Digital alarm clock sound.mp3'),
+      Digital: new Audio('assets/Digital alarm clock sound.mp3'),
       Classic: new Audio('assets/Classic Alarm Clock - Sound Effect  ProSounds.mp3'),
-      Siren: new Audio('C:/Personal projects/Pomodoro Timer Web App/assets/Alarm sound effect.mp3'),
-      Watchtower: new Audio('C:/Personal projects/Pomodoro Timer Web App/assets/Ominous Bells of Doom.mp3')
+      Siren: new Audio('assets/Alarm sound effect.mp3'),
+      Watchtower: new Audio('assets/Ominous Bells of Doom.mp3')
     };
     
     // Play the audio
@@ -254,20 +254,21 @@ function playAudioForDuration(durationInSeconds, alarmitem) {
         console.log(`Audio stopped after ${durationInSeconds} seconds.`);
     }, durationInSeconds * 1000);
   }
-document.getElementById('alertSound').addEventListener("change", function run(){
-  if(this.value = "Digital"){
-    playAudioForDuration(3,0);
-  }
-  if(this.value = "Classic"){
-    playAudioForDuration(3,1);
-  }
-  if(this.value = "Siren"){
-    playAudioForDuration(3,2);
-  }
-  if(this.value = "Watchtower"){
-    playAudioForDuration(3,4);
-  }
-});
+  function run(){
+    if(this.value === "Digital"){
+      playAudioForDuration(3,"Digital");
+    }
+    if(this.value === "Classic"){
+      playAudioForDuration(3,"Classic");
+    }
+    if(this.value === "Siren"){
+      playAudioForDuration(3,"Siren");
+    }
+    if(this.value === "Watchtower"){
+      playAudioForDuration(3,"Watchtower");
+    }
+}
+document.getElementById('alertSound').addEventListener("change", run);
 // Music Player Overlay Functionality
 const musicOverlay = document.getElementById('musicOverlay');
 const closeMusicPlayer = document.getElementById('closeMusicPlayer');
