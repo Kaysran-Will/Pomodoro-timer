@@ -269,12 +269,30 @@ function playAudioForDuration(durationInSeconds, alarmitem) {
     }
 }
 document.getElementById('alertSound').addEventListener("change", run);
+//Changing background according to dropdown list
+const element = document.querySelector('.background-layer');
+
+const backgrounds = {
+  Cozy: "https://i.pinimg.com/1200x/90/70/32/9070324cdfc07c68d60eed0c39e77573.jpg",
+  Sunrise: "https://i.pinimg.com/736x/2d/a9/c4/2da9c4f0d49127e870ba28f8db2c848c.jpg",
+  Night: "https://i.pinimg.com/1200x/0b/a9/e2/0ba9e25e74077f7e01b2de8451ee952a.jpg"
+};
+
+function backg() {
+  const key = this.value; // Cozy / Sunrise / Night
+  const url = backgrounds[key];
+  element.style.backgroundImage = `url("${url}")`;
+}
+
+document.getElementById('theme-select').addEventListener("change", backg);
+
+
 // Music Player Overlay Functionality
 const musicOverlay = document.getElementById('musicOverlay');
 const closeMusicPlayer = document.getElementById('closeMusicPlayer');
 const songDropdown = document.getElementById('songDropdown');
 const selectedSong = document.getElementById('selectedSong');
-const songOptions = document.getElementById('songOptions');
+const songOptions = document.getElementById('songOptions'); 
 
 // Show overlay function (call this from your playlist button)
 function showMusicPlayer() {
