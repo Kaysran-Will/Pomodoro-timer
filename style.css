@@ -445,9 +445,10 @@ body {
 
 /* NEW: The actual modal box container */
 .modal-container {
-  background-color: rgb(0, 0, 0);
-  /* semi-transparent */
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   /* Dark background for the whole modal box */
   border-radius: 1rem;
   /* Rounded corners for the entire modal */
@@ -653,10 +654,10 @@ body {
   border-top-color: #8be9fd;
 }
 .setting-item select{
-  background-color: #333;
-  border: 1px solid #555;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   color: #fff;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
   padding: 0.35rem 2rem 0.35rem 1rem;
   margin-top: 0.6rem;
   border-radius: 0.5rem;
@@ -680,11 +681,11 @@ body {
   text-align:start;
   text-align-last: center;   /* Center selected option text */
 
-  background-color: #222;    /* Darker background for contrast */
+  background-color: rgba(255, 255, 255, 0.1);    /* Translucent background */
   color: #fff;               /* White text for arrow consistency */
-  border: 1px solid #555;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 0.5rem;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
   cursor: pointer;
   z-index: 2;                /* Ensure select input is above wrapper */
   transition: all 0.3s ease;
@@ -703,11 +704,11 @@ body {
   text-align:center;
   text-align-last: center;   /* Center selected option text */
 
-  background-color: #222;    /* Darker background for contrast */
+  background-color: rgba(255, 255, 255, 0.1);    /* Translucent background */
   color: #fff;               /* White text for arrow consistency */
-  border: 1px solid #555;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 0.5rem;
-  box-shadow: inset 0 1px 2px rgba(0,0,0,0.6);
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);
   cursor: pointer;
   z-index: 2;                /* Ensure select input is above wrapper */
   transition: all 0.3s ease;
@@ -716,8 +717,12 @@ body {
   margin-bottom: 0.7rem;
 }
 /* 2. Native dropdown styling (limited support) */
-.form-select option {
-  background-color: #222;    /* Match select background */
+.form-select option,
+.form-select1 option,
+.setting-item select option {
+  background-color: rgba(30, 30, 30, 0.85);    /* Premium translucent options */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   color: #fff;               /* White text */
   text-align: center;
 }
