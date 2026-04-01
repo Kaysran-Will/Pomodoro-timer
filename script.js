@@ -424,27 +424,11 @@ function updateDeleteThemeBtn() {
   btn.style.display = isCustom ? 'inline-block' : 'none';
 }
 
-function applyThemeColors(themeName) {
-  const themeColors = {
-    Cozy: "#2c3e50",
-    Sunrise: "#2c3e50",
-    Night: "#ffffff"
-  };
-  const selectedColor = themeColors[themeName] || "#ffffff";
-  document.body.style.color = selectedColor;
-  
-  document.querySelectorAll('.modes button, .controls button, .controls .settings, .controls .reset').forEach(btn => {
-    btn.style.borderColor = (themeName === 'Cozy' || themeName === 'Sunrise') ? 'rgba(44, 62, 80, 0.5)' : 'rgba(255, 255, 255, 0.5)';
-    btn.style.color = selectedColor;
-  });
-}
-
 function backg() {
   const key = this.value; // Cozy / Sunrise / Night / Custom XYZ
   const url = backgrounds[key];
   element.style.backgroundImage = `url("${url}")`;
   updateDeleteThemeBtn();
-  applyThemeColors(key);
 }
 
 document.getElementById('theme-select').addEventListener("change", backg);
@@ -494,7 +478,6 @@ window.addEventListener('load', () => {
   });
 
   document.querySelector('.background-layer').style.backgroundImage = `url("${backgrounds[appliedTheme] || backgrounds['Cozy']}")`;
-  applyThemeColors(appliedTheme || 'Cozy');
   
   // Request notification permission if not asked yet
   if ('Notification' in window && Notification.permission === 'default') {
