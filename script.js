@@ -433,7 +433,7 @@ function applyThemeColors(themeName) {
   const selectedColor = themeColors[themeName] || "#ffffff";
   document.body.style.color = selectedColor;
   
-  document.querySelectorAll('.modes button, .controls button, .controls .settings, .controls .reset').forEach(btn => {
+  document.querySelectorAll('.modes button').forEach(btn => {
     btn.style.borderColor = (themeName === 'Cozy' || themeName === 'Sunrise') ? 'rgba(44, 62, 80, 0.5)' : 'rgba(255, 255, 255, 0.5)';
     btn.style.color = selectedColor;
   });
