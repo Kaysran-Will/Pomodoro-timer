@@ -1307,6 +1307,7 @@ body {
   }
 
   .controls .start-button {
+    width: auto !important;
     flex: 0 0 auto !important;
     height: 3.5rem !important;
     margin: 0 !important;
