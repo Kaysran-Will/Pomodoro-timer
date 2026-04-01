@@ -1271,18 +1271,19 @@ body {
 
   /* Override any old mobile queries */
   .modes {
-    flex-direction: column !important;
-    gap: 0.8rem !important;
+    flex-direction: row !important;
+    gap: 0.5rem !important;
     align-items: center !important;
     margin-bottom: 2rem !important;
     margin-top: 1rem !important;
   }
 
   .modes button {
-    width: 90% !important;
+    width: auto !important;
+    flex: 1 1 30% !important;
     justify-content: center !important;
-    font-size: 1.1rem !important;
-    padding: 0.8rem 1rem !important;
+    font-size: 0.85rem !important;
+    padding: 0.6rem 0.2rem !important;
     display: flex !important;
   }
 
@@ -1292,12 +1293,13 @@ body {
   }
 
   .controls {
-    flex-direction: column !important;
+    flex-direction: row !important;
+    justify-content: center !important;
     width: 100% !important;
-    gap: 1.5rem !important;
+    gap: 0.5rem !important;
   }
 
-  .controls button {
+  .controls .start-button {
     width: 80% !important;
     justify-content: center !important;
     padding: 1rem !important;
@@ -1306,8 +1308,8 @@ body {
   
   .settings,
   .reset {
-    width: 5rem !important;
-    height: 5rem !important;
+    width: 3.5rem !important;
+    height: 3.5rem !important;
   }
   
   .modal-container {
