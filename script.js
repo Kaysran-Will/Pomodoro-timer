@@ -411,8 +411,8 @@ document.querySelector('.playlist').addEventListener('click', () => {
 //Changing background according to dropdown list
 const element = document.querySelector('.background-layer');
 const backgrounds = {
-  Cozy: "https://i.pinimg.com/1200x/90/70/32/9070324cdfc07c68d60eed0c39e77573.jpg",
-  Sunrise: "https://i.pinimg.com/1200x/f7/77/d1/f777d19aadddfcb185638bd193872a76.jpg",
+  Cozy: "https://images4.alphacoders.com/140/thumb-1920-1405993.png",
+  Sunrise: "https://images7.alphacoders.com/120/thumb-1920-1205979.png",
   Night: "https://i.pinimg.com/1200x/0b/a9/e2/0ba9e25e74077f7e01b2de8451ee952a.jpg"
 };
 

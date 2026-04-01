@@ -39,7 +39,7 @@ body {
 
 #app {
   position: relative;
-
+  mix-blend-mode: difference;
 }
 
 /* New style for the top-right button container */
