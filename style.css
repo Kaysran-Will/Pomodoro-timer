@@ -157,14 +157,15 @@ body {
   padding: 0.625rem 1.5rem;
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
-  color: rgb(0, 0, 0);
+  color: #fff;
   /* Default text color for non-icon buttons */
-  background: white;
+  background: transparent;
+  mix-blend-mode: difference;
   /* Default background for non-icon buttons */
 }
 
 .controls button:hover {
-  background: #f1f1f1;
+  background: rgba(255, 255, 255, 0.2);
   transform: scale(1.05);
 }
 
@@ -175,7 +176,7 @@ body {
 /* Combined styles for icon buttons within .controls and .top */
 .settings,
 .reset {
-  background: rgba(128, 128, 128, 0.2);
+  background: transparent;
   /* Transparent grey background */
   border: 0.125rem solid rgba(255, 255, 255, 0.5);
   /* White outline */
@@ -257,6 +258,7 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
+  filter: invert(100%);
   /* Turns black SVGs white */
 }
 
