@@ -39,7 +39,6 @@ body {
 
 #app {
   position: relative;
-  mix-blend-mode: difference;
 }
 
 /* New style for the top-right button container */
@@ -1300,10 +1299,12 @@ body {
   }
 
   .controls .start-button {
-    width: 80% !important;
+    width: auto !important;
+    flex: 1 1 auto !important;
+    min-height: 3.5rem !important;
     justify-content: center !important;
-    padding: 1rem !important;
-    font-size: 1.2rem !important;
+    padding: 0.5rem 1rem !important;
+    font-size: 1.1rem !important;
   }
   
   .settings,
